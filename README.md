@@ -13,6 +13,7 @@
 1. All selected values get cleared by clicking the clear button.
 2. The values that are selected can only be used when clicked on submit button.
 3. On blur event, all the data gets cleared.
+4. On submit button, the values that are selected can be access through the getValue function passed to dropdown component.
 
 
 ## Development setup
