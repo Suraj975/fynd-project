@@ -1,0 +1,72 @@
+body {
+  background-color: #f8f8f8;
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  background-color: #f8f8f8;
+  height: 100vh;
+}
+.main {
+  display: block;
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  font-size: 20px;
+}
+/* Hiding the initial checkbox */
+input[type="checkbox"] {
+  visibility: hidden;
+}
+/* Creating a custom checkbox based on demand */
+.dropdown-checkbox {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  height: 17px;
+  width: 17px;
+  border-radius: 2px;
+  border: 1px solid black;
+  background-color: white;
+}
+
+.main:hover input ~ .dropdown-checkbox {
+  background-color: white;
+}
+
+.main input:active ~ .dropdown-checkbox {
+  background-color: white;
+  border-radius: 2px;
+}
+
+.main input:checked ~ .dropdown-checkbox {
+  background-color: #3a3e45;
+  border-radius: 2px;
+}
+
+.dropdown-checkbox:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.main input:checked ~ .dropdown-checkbox:after {
+  display: block;
+  border-radius: 2px;
+}
+
+.main .dropdown-checkbox:after {
+  left: 4px;
+  bottom: 6px;
+  top: 1px;
+  width: 5px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  border-radius: 2px;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
