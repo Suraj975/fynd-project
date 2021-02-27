@@ -20,7 +20,7 @@
 ### Clone
 
 ```sh
-git clone https://github.com/Suraj975/test1.git
+git clone https://github.com/Suraj975/fynd-project.git
 ```
 
 ### npm
