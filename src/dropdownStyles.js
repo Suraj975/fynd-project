@@ -46,7 +46,7 @@ export const DefaultBox = styled.div`
 
 export const InputSearch = styled.input`
   height: 40px;
-  width: 98%;
+  width: 99%;
   border: 1px solid #f2f2f2;
   border-radius: 4px;
   font-size: 15px;
@@ -127,6 +127,7 @@ export const DropdownBox = styled.div`
   border-top: none;
   margin-top: 5px;
   margin-left: 3px;
+  box-shadow: 2px 2px 9px 2px #f2f2f2;
 `;
 
 export const ScrollableBox = styled.div`

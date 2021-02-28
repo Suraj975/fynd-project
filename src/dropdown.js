@@ -26,6 +26,7 @@ const Dropdown = (props) => {
   let [searchInput, setSearch] = useState("");
   let [searchResult, filterSearchOptions] = useState({});
   let [selection, showSelection] = useState(true);
+  let timeOutRefsId = useRef([])
   let inputRef = useRef(null);
 
   //Creating changes in the option input
@@ -45,7 +46,13 @@ const Dropdown = (props) => {
         setOptions(modifiedValue);
       }
     }
+    // Cleaning if any left setTimeouts
+    return () => {
+      if(timeOutRefsId.current.length > 0) timeOutRefsId.current.forEach((ids) => clearTimeout(ids) )
+    }
   }, []);
+
+
 
   //This is responsible for the checkbox selected
   const handleResult = (e, val) => {
@@ -111,15 +118,16 @@ const Dropdown = (props) => {
   //default box
   const handleDefaultBox = () => {
     setOpen({ dropdownVisible: true });
-    setTimeout(() => {
+    let defaultboxId = setTimeout(() => {
       inputRef.current.focus();
     }, 0);
+    timeOutRefsId.current.push(defaultboxId);
   };
 
   // blur event handling
   const handleBlur = (e) => {
     const currentTarget = e.currentTarget;
-    setTimeout(() => {
+    let blurId = setTimeout(() => {
       if (!currentTarget.contains(document.activeElement)) {
         setOpen({ dropdownVisible: false });
         handleClear();
@@ -127,8 +135,14 @@ const Dropdown = (props) => {
         setSubmit({});
       }
     }, 0);
+    timeOutRefsId.current.push(blurId);
   };
 
+  const handleFocus = (e) => {
+    if(timeOutRefsId.current.length > 0){ timeOutRefsId.current.forEach((ids) => clearTimeout(ids) )
+      timeOutRefsId.current = [];
+    }
+  }
   //created options display UI
   const displayOptions = () => {
     let search = Object.keys(searchResult).length > 0 ? searchResult : options;
@@ -159,7 +173,7 @@ const Dropdown = (props) => {
   return (
     <DropdownWrapper>
       <Container onMouseDown={(e) => e.preventDefault()}>
-        <div style={{ width: "100%" }} onBlur={handleBlur}>
+        <div style={{ width: "100%" }} onBlur={handleBlur} onFocus={handleFocus}>
           {!open.dropdownVisible ? (
             <DefaultBox
               onClick={handleDefaultBox}
